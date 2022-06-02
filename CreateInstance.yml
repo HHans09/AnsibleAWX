@@ -1,4 +1,4 @@
-amazon.aws.ec2:
+- amazon.aws.ec2:
   key_name: heena
   instance_type: t2.micro
   image: ami-0489c6c0a2c0b6281
@@ -8,4 +8,4 @@ amazon.aws.ec2:
   vpc_subnet_id: subnet-03813c401556fd63c
   assign_public_ip: 'yes'
   instance-tags:
-    Name: TestHH
+    - Name: TestHH
