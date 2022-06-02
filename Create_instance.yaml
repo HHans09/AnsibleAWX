@@ -1,1 +1,13 @@
-
+- name: start an instance with a public IP address
+  amazon.aws.ec2_instance:
+    name: "public-compute-instance"
+    key_name: "heena"
+    vpc_subnet_id: subnet-03813c401556fd63c
+    instance_type: c5.large
+    security_group: qa-featurebase
+    network:
+      - assign_public_ip: true
+    image_id: ami-0489c6c0a2c0b6281
+    tags:
+      - Environment: Testing
+      - Name: Ingest
