@@ -7,7 +7,7 @@
     image: ami-0489c6c0a2c0b6281
   tasks:
 - name: "Provisioning of a EC2 Instance"
-      ec2:
+  ec2:
         region: "{{ aws_region }}"
         key_name: "{{ key_name }}"
         instance_type: t2.micro
@@ -17,9 +17,9 @@
         count: 1
         vpc_subnet_id: "{{ subnet.id }}"
         assign_public_ip: yes
-      register: awx_instance
+  register: awx_instance
 
 
-    - name: "Debug task to show the public IP of EC2 Instance"
-      debug:
+- name: "Debug task to show the public IP of EC2 Instance"
+  debug:
         msg: "Public IP of the RHEL8 Instance is {{ awx_instance.instances[0].public_ip }}"
