@@ -6,7 +6,7 @@
     key_name: heena
     image: ami-0489c6c0a2c0b6281
   tasks:
-- name: "Provisioning of a RHEL8 EC2 Instance"
+- name: "Provisioning of a EC2 Instance"
       ec2:
         region: "{{ aws_region }}"
         key_name: "{{ key_name }}"
@@ -20,6 +20,6 @@
       register: awx_instance
 
 
-    - name: "Debug task to show the public IP of RHEL8 EC2 Instance"
+    - name: "Debug task to show the public IP of EC2 Instance"
       debug:
         msg: "Public IP of the RHEL8 Instance is {{ awx_instance.instances[0].public_ip }}"
