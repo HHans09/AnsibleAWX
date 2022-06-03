@@ -1,13 +1,25 @@
-- name: start an instance with a public IP address
-  amazon.aws.ec2_instance:
-    name: "public-compute-instance"
+---
+- name: "Run the playbook for AWS resources provisioning."
+  vars:
+    aws_region: us-east-2
+    subnet.id: subnet-03813c401556fd63c
     key_name: heena
-    vpc_subnet_id: subnet-03813c401556fd63c
-    instance_type: c5.large
-    security_group: qa-featurebase
-    network:
-      assign_public_ip: true
-    image_id: ami-0489c6c0a2c0b6281
-    tags:
-      Environment: Testing
-      Name: Ingest
+    image: ami-0489c6c0a2c0b6281
+  tasks:
+- name: "Provisioning of a RHEL8 EC2 Instance"
+      ec2:
+        region: "{{ aws_region }}"
+        key_name: "{{ key_name }}"
+        instance_type: t2.micro
+        image: "{{ image }}"
+        wait: yes
+        group: qa-featurebase
+        count: 1
+        vpc_subnet_id: "{{ subnet.id }}"
+        assign_public_ip: yes
+      register: awx_instance
+
+
+    - name: "Debug task to show the public IP of RHEL8 EC2 Instance"
+      debug:
+        msg: "Public IP of the RHEL8 Instance is {{ awx_instance.instances[0].public_ip }}"
